@@ -32,8 +32,11 @@ table_entry* init_column(char * name, int num_data)
 	if( NULL != newEntry)
 	{
 		newEntry->column_name = name;
-		newEntry->column_data = malloc(sizeof(double) * num_data);
+		newEntry->column_data = malloc(sizeof(double) * (num_data + 1));
 	}
+	newEntry->column_data[0] = num_data;
+
+	printf("\n Init_column\nSize of array:%.1f\n\n",newEntry->column_data[0]);
 	newEntry->column_data[num_data] = -255;
 	return newEntry;
 }
@@ -62,8 +65,15 @@ void print_table(table *temp)
 	printf("Second Column in the table:\n");
 	print_column(temp->entry);
 }
-void Fill_column(table_entry *column)
+void Fill_column(table_entry *column,double *data)
 {
+	printf("Filling the column %s \n",column->column_name);
+	int i = 0;
+	int length = column->column_data[0];
+	for (i ; i < length ; i++)
+	{
+		column->column_data[i] = data[i];
+	}
 	// Function stub for filling data
 	// into the columns of a table.
 }
@@ -71,6 +81,12 @@ int main()
 {
 	printf("Test print\n");
 	table* test;
+	double *test_Data = malloc(sizeof(double)*10);
+	int i;
+	for (i = 0 ; i < 10 ; i++)
+	{
+		test_Data[i] = i;
+	}
 	test = create_table("March 10th");
 	if ( test )
 	{
@@ -83,8 +99,7 @@ int main()
 		printf("Entry created successfully!\n");
 		
 	}
-	printf("Filling the first column\n");
-
+	Fill_column(test->entry,test_Data);
 	print_column(test->entry);
 	
 
