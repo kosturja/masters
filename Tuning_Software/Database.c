@@ -9,7 +9,15 @@
 #include <Database.h>
 
 /* This is the implementation of my database, for a Tuning Software. */
-
+Database* create_DB(char *Databasename)
+{
+	Database* newDatabase = malloc(sizeof(Database));
+	if (NULL != newDatabase)
+	{
+		newDatabase->Database_name = Databasename;
+		newDatabase->table = NULL;
+	}
+}
 
 
 table* create_table(char * tablename)
@@ -35,9 +43,11 @@ table_entry* init_column(char * name, int num_data)
 		newEntry->column_data = malloc(sizeof(double) * (num_data + 1));
 	}
 	newEntry->column_data[0] = num_data;
+	/* Debugging print statements */
 	#ifdef DEBUG
 	printf("\n Init_column\tSize of array:%.1f\n",newEntry->column_data[0]);
 	#endif
+	/* end debugging stuff */
 	newEntry->column_data[num_data+1] = -255;
 	return newEntry;
 }
@@ -83,37 +93,4 @@ void Fill_column(table_entry *column,double *data)
 	// Function stub for filling data
 	// into the columns of a table.
 }
-int main()
-{
-	printf("\n");
-	#ifdef DEBUG
-	printf("Debugging has been enabled!\nThis means we will have some extra print statements\n");
-	#endif
-	table* test;
-	double *test_Data = malloc(sizeof(double)*10);
-	int i = 0;
-	for (i  ; i < 10 ; i++)
-	{
-		test_Data[i] = 12;
-	}
-	test = create_table("March 10th");
-	if ( test )
-	{
-		printf("First Table successfully created!\n");
-		printf("Table name is:%s\n",test->table_name);
-	}
-	test->entry = init_column("AFR", 10);
-	if ( test->entry )
-	{
-		printf("Entry created successfully!\n");
-		
-	}
-	//print_column(test->entry);
-	Fill_column(test->entry,test_Data);
-	print_column(test->entry);
-	
 
-	
-
-	return 0;
-}
