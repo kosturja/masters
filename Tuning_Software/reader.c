@@ -21,12 +21,12 @@ file_info*  readfile(char *filename)
 	temp->column_length = calc_column_length(fp);
 	return temp;
 }
-
+/*	Calculates the number of columns in the file */
 int calc_number_columns(FILE *fp)
 {
 	return 10;
 }
-
+/*	Calculates the number of rows in each column */
 int calc_column_length(FILE *fp)
 {
 	return 15;
