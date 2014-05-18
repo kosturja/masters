@@ -11,13 +11,25 @@ int main()
 	#ifdef DEBUG
 	printf("Debugging has been enabled!\nThis means we will have some extra print statements\n");
 	#endif
-	Database* head;
-	Database* tail;
-	Database* current;
-	head = create_DB("Test_DB");
+	/* Pointers for the Database */
+	Database* data_head;
+	Database* data_tail;
+	Database* data_current;
+	/* Pointers for the File linked list */
+	file_info* file_head;
+	file_info* file_tail;
+	file_info* file_current;
+
+	file_head = readfile("TestFileName");
+	printf("File info:\nFilename:%s\nTablename:%s\nColumns:%d\nLength:%d\n"
+		,file_head->filename,file_head->tablename,file_head->number_columns,file_head->column_length);
+
+
+	/* Init the database, and the first table */
+	data_head = create_DB("Test_DB");
 	table* test;
 	test = create_table("March 10th");
-	head->table = test;
+	data_head->table = test;
 
 	/* Creating test data */
 	double *test_Data = malloc(sizeof(double)*10);
