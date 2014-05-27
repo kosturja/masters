@@ -20,7 +20,7 @@ int main()
 	file_info* file_tail;
 	file_info* file_current;
 
-	file_head = readfile("TestFileName");
+	file_head = readfile("test2.txt");
 	printf("File info:\nFilename:%s\nTablename:%s\nColumns:%d\nLength:%d\n"
 		,file_head->filename,file_head->tablename,file_head->number_columns,file_head->column_length);
 
