@@ -29,5 +29,5 @@ typedef struct file_info
 file_info* readfile(char *filename);
 
 char* extract_table_name(char* filename);
-int calc_column_length(FILE *fp);
-int calc_number_columns(FILE *fp);
+int calc_column_length(int fp);
+int calc_number_columns(int fp);

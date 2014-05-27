@@ -6,10 +6,10 @@
 
 file_info*  readfile(char *filename)
 {
-	FILE *fp;
+	int fp;
 	char *mode = "r";
 	fp = open(filename,mode);
-	printf("About to open the file\n");
+	printf("About to open the file:%d\n",fp);
 	if (fp == NULL)
 	{
 		printf("Error opening file %s\n",filename);
@@ -28,29 +28,15 @@ file_info*  readfile(char *filename)
 	return temp;
 }
 /*	Calculates the number of columns in the file */
-int calc_number_columns(FILE *fp)
+int calc_number_columns(int fp)
 {
-	int count;
-	char c;
-
-    count = 0;
-    for( ;; )
-    {
-        c = fgetc( fp );
-        if( c == EOF || c == '\n' )
-            break;
-        ++count;
-    }
-
-    if( count == 0)
-    {
-    	return -1;
-    }
-
-    return count;
+	char *buffer = malloc(sizeof(char) * 20);
+	fgets(buffer,20,fp);
+	printf("Read this from file%s\n",buffer);
+	return 10;
 }
 /*	Calculates the number of rows in each column */
-int calc_column_length(FILE *fp)
+int calc_column_length( int fp)
 {
 	return 15;
 }
